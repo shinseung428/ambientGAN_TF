@@ -2,6 +2,8 @@
 from glob import glob 
 import os
 import tensorflow as tf
+import numpy as np
+import cv2 
 
 from measurement import *
 
@@ -30,7 +32,7 @@ def load_train_data(args):
 
 	return train_batch, data_count
 
-def img_tile(step, args, imgs, aspect_ratio=1.0, tile_shape=None, border=1, border_color=0):
+def img_tile(epoch, args, imgs, aspect_ratio=1.0, tile_shape=None, border=1, border_color=0):
 	imgs = imgs[0]
 
 	if imgs.ndim != 3 and imgs.ndim != 4:
@@ -68,4 +70,4 @@ def img_tile(step, args, imgs, aspect_ratio=1.0, tile_shape=None, border=1, bord
 			xoff = (img_shape[1] + border) * j
 			tile_img[yoff:yoff+img_shape[0], xoff:xoff+img_shape[1], ...] = img
 
-	cv2.imwrite(args.images+"/img_"+str(step) + ".jpg", tile_img*255.)
+	cv2.imwrite(args.images_path+"/img_"+str(epoch) + ".jpg", tile_img*255.)

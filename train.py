@@ -10,7 +10,6 @@ def train(args, sess, model):
 
     epoch = 0
     step = 0
-    overall_step = 0
 
     #saver
     saver = tf.train.Saver()        
@@ -50,15 +49,19 @@ def train(args, sess, model):
         writer.add_summary(summary, step)
 
 
-        print "step [%d] G Loss: [%.4f] D Loss: [%.4f]" % (step, g_loss, d_loss)
+        print "Epoch [%d] Step [%d] G Loss: [%.4f] D Loss: [%.4f]" % (epoch, step, g_loss, d_loss)
 
         if step*args.batch_size >= model.data_count:
             saver.save(sess, args.checkpoints_path + "model", global_step=epoch)
+
+            res_img = sess.run([model.genX])
+
+            img_tile(epoch, args, res_img)
             step = 0
             epoch += 1 
 
         step += 1
-        overall_step += 1
+
 
 
     coord.request_stop()
