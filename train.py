@@ -83,7 +83,6 @@ def main(_):
         print 'Start Training...'
         train(args, sess, model)
 
-
 main(args)
 
 #Still Working....

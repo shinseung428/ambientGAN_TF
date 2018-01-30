@@ -33,5 +33,5 @@ parser.add_argument('--momentum', dest='momentum', default=0.5, help='momentum o
 #Extra folders setting
 parser.add_argument('--checkpoints_path', dest='checkpoints_path', default='./checkpoints/', help='saved model checkpoint path')
 parser.add_argument('--graph_path', dest='graph_path', default='./graphs/', help='tensorboard graph')
-
+parser.add_argument('--images_path', dest='images_path', default='./images/', help='result images path')
 args = parser.parse_args()
