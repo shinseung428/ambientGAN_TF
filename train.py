@@ -28,21 +28,20 @@ def train(args, sess, model):
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
 
-    all_summary = tf.summary.merge([model.genX])
+    all_summary = tf.summary.merge([model.images_sum,
+                                    model.genX_sum, 
+                                    model.d_loss_sum,
+                                    model.g_loss_sum])
 
     writer = tf.summary.FileWriter(args.graph_path, sess.graph)
 
     while True:
         #Update Generator
-        summary, g_loss, _ = sess.run([all_summary, 
-                                      model.g_loss, 
-                                      g_optimizer])
+        summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])
         writer.add_summary(summary, step)
 
         #Update Discriminator
-        summary, d_loss, _ = sess.run([all_summary, 
-                                      model.d_loss, 
-                                      d_optimizer])
+        summary, d_loss, _ = sess.run([all_summary, model.d_loss, d_optimizer])
         writer.add_summary(summary, step)
 
 
@@ -50,11 +49,6 @@ def train(args, sess, model):
 
         if step % 1000 == 0:
             saver.save(sess, args.checkpoints_path + "model", global_step=step)
-            print "Model saved at step %s" % str(step)                
-
-            res = sess.run([model.pred_rgb], feed_dict={model.gray:v_images,
-                                                        model.orig:v_images_})
-            img_tile(step, args, res)
 
         step += 1
 

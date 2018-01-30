@@ -13,6 +13,11 @@ class ambientGAN():
         self.build_model()
         self.build_loss()
 
+        #summary
+        self.d_loss_sum = tf.summary.scalar("d_loss", self.d_loss) 
+        self.g_loss_sum = tf.summary.scalar("g_loss", self.g_loss)
+        self.images_sum = tf.summary.image("input_img", self.images)
+        self.genX_sum = tf.summary.image("genX", self.genX)
 
     def build_model(self):
         batch_z = tf.random_uniform([self.batch_size, self.input_dim], minval=-1, maxval=1, dtype=tf.float32)
@@ -34,7 +39,10 @@ class ambientGAN():
 
     def build_loss(self):
         def calc_loss(logits, label):
-            y = tf.ones_like(logits)
+            if label==1:
+                y = tf.ones_like(logits)
+            else:
+                y = tf.zeros_like(logits)
             return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=logits, labels=y))
 
         self.real_d_loss = calc_loss(self.real_d_logits, 1)
@@ -121,7 +129,7 @@ class ambientGAN():
 
     def measurement_fn(self, input, name="measurement_fn"):
         with tf.variable_scope(name) as scope:
-            return block_pixels(input, p=0.5)
+            return block_pixels(input, p=0.1)
 
 
 

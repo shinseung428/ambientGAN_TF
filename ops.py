@@ -4,7 +4,7 @@ import os
 import tensorflow as tf
 
 def load_train_data(args):
-	paths = os.path.join(args.data, "data/img_align_celeba/*.jpg")
+	paths = os.path.join(args.data, "img_align_celeba/*.jpg")
 	data_count = len(glob(paths))
 	
 	filename_queue = tf.train.string_input_producer(tf.train.match_filenames_once(paths))
