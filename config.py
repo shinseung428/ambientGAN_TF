@@ -24,7 +24,7 @@ parser.add_argument('--continue_training', dest='continue_training', default=Fal
 
 parser.add_argument('--data', dest='data', default='data', help='cats image train path')
 
-parser.add_argument('--epochs', dest='epochs', default=10, help='total number of epochs')
+parser.add_argument('--epochs', dest='epochs', default=25, help='total number of epochs')
 parser.add_argument('--batch_size', dest='batch_size', default=64, help='batch size')
 
 parser.add_argument('--learning_rate', dest='learning_rate', default=1e-5, help='learning rate of the optimizer')

@@ -70,4 +70,4 @@ def img_tile(epoch, args, imgs, aspect_ratio=1.0, tile_shape=None, border=1, bor
 			xoff = (img_shape[1] + border) * j
 			tile_img[yoff:yoff+img_shape[0], xoff:xoff+img_shape[1], ...] = img
 
-	cv2.imwrite(args.images_path+"/img_"+str(epoch) + ".jpg", tile_img*255.)
+	cv2.imwrite(args.images_path+"/img_"+str(epoch) + ".jpg", (tile_img + 1)*127.5)
