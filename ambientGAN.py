@@ -130,6 +130,7 @@ class ambientGAN():
     def measurement_fn(self, input, name="measurement_fn"):
         with tf.variable_scope(name) as scope:
             return block_pixels(input, p=0.5)
+            return block_patch(input, 16)
 
 
 
