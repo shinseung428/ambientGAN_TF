@@ -8,7 +8,9 @@ def train(args, sess, model):
     g_optimizer = tf.train.AdamOptimizer(args.learning_rate, beta1=args.momentum, name="AdamOptimizer_G").minimize(model.g_loss, var_list=model.g_vars)
     d_optimizer = tf.train.AdamOptimizer(args.learning_rate, beta1=args.momentum, name="AdamOptimizer_D").minimize(model.d_loss, var_list=model.d_vars)
 
+    epoch = 0
     step = 0
+    overall_step = 0
 
     #saver
     saver = tf.train.Saver()        
@@ -35,22 +37,28 @@ def train(args, sess, model):
 
     writer = tf.summary.FileWriter(args.graph_path, sess.graph)
 
-    while True:
+    while epoch < args.epochs:
+        #Update Discriminator
+        summary, d_loss, _ = sess.run([all_summary, model.d_loss, d_optimizer])
+        writer.add_summary(summary, step)
+
         #Update Generator
         summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])
         writer.add_summary(summary, step)
-
-        #Update Discriminator
-        summary, d_loss, _ = sess.run([all_summary, model.d_loss, d_optimizer])
+        #Update Generator Again
+        summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])
         writer.add_summary(summary, step)
 
 
         print "step [%d] G Loss: [%.4f] D Loss: [%.4f]" % (step, g_loss, d_loss)
 
-        if step % 1000 == 0:
-            saver.save(sess, args.checkpoints_path + "model", global_step=step)
+        if step*args.batch_size >= model.data_count:
+            saver.save(sess, args.checkpoints_path + "model", global_step=epoch)
+            step = 0
+            epoch += 1 
 
         step += 1
+        overall_step += 1
 
 
     coord.request_stop()
