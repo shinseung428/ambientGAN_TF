@@ -1,4 +1,7 @@
 import tensorflow as tf
+from config import *
+from ambientGAN import *
+
 
 def train(args, sess, model):
     #optimizer
@@ -10,7 +13,7 @@ def train(args, sess, model):
     #saver
     saver = tf.train.Saver()        
     if args.continue_training:
-        last_ckpt = tf.train.latest_checkpoint(args.modelpath)
+        last_ckpt = tf.train.latest_checkpoint(args.checkpoints_path)
         saver.restore(sess, last_ckpt)
         ckpt_name = str(last_ckpt)
         print "Loaded model file from " + ckpt_name
@@ -27,7 +30,7 @@ def train(args, sess, model):
 
     all_summary = tf.summary.merge([model.genX])
 
-    writer = tf.summary.FileWriter(args.graphpath, sess.graph)
+    writer = tf.summary.FileWriter(args.graph_path, sess.graph)
 
     while True:
         #Update Generator
@@ -46,7 +49,7 @@ def train(args, sess, model):
         print "step [%d] G Loss: [%.4f] D Loss: [%.4f]" % (step, g_loss, d_loss)
 
         if step % 1000 == 0:
-            saver.save(sess, args.modelpath + "model", global_step=step)
+            saver.save(sess, args.checkpoints_path + "model", global_step=step)
             print "Model saved at step %s" % str(step)                
 
             res = sess.run([model.pred_rgb], feed_dict={model.gray:v_images,
@@ -70,10 +73,10 @@ def main(_):
         model = ambientGAN(args)
 
         #create graph and checkpoints folder if they don't exist
-        if not os.path.exists(args.modelpath):
-            os.makedirs(args.modelpath)
-        if not os.path.exists(args.graphpath):
-            os.makedirs(args.graphpath)
+        if not os.path.exists(args.checkpoints_path):
+            os.makedirs(args.checkpoints_path)
+        if not os.path.exists(args.graph_path):
+            os.makedirs(args.graph_path)
             
         print 'Start Training...'
         train(args, sess, model)
