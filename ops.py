@@ -22,7 +22,8 @@ def load_train_data(args):
 	images = tf.image.resize_images(images ,[args.input_height, args.input_width])
 	images = tf.image.convert_image_dtype(images, dtype=tf.float32) / 127.5 - 1
 
-	images = block_pixels(images, 0.5)
+	# images = block_pixels(images, 0.5)
+	images = block_patch(images, 16)
 
 	train_batch = tf.train.shuffle_batch([images],
 										 batch_size=args.batch_size,
