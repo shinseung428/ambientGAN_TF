@@ -6,26 +6,29 @@ from measurement import *
 
 class ambientGAN():
     def __init__(self, args):
+        self.measurement = args.measurement
+
         self.batch_size = args.batch_size
         self.input_dim = args.input_dim 
 
-        self.images, self.data_count = load_train_data(args)
+        self.Y_r, self.data_count = load_train_data(args)
         self.build_model()
         self.build_loss()
 
         #summary
         self.d_loss_sum = tf.summary.scalar("d_loss", self.d_loss) 
         self.g_loss_sum = tf.summary.scalar("g_loss", self.g_loss)
-        self.images_sum = tf.summary.image("input_img", self.images)
-        self.genX_sum = tf.summary.image("genX", self.genX)
+        self.Y_r_sum = tf.summary.image("input_img", self.Y_r)
+        self.X_g_sum = tf.summary.image("X_g", self.X_g)
+        self.Y_g_sum = tf.summary.image("Y_g", self.Y_g)
 
     def build_model(self):
-        batch_z = tf.random_uniform([self.batch_size, self.input_dim], minval=-1, maxval=1, dtype=tf.float32)
-        self.genX, self.g_nets = self.generator(batch_z, name="generator")
+        batch_z = tf.Variable(tf.random_uniform([self.batch_size, self.input_dim], minval=-1, maxval=1, dtype=tf.float32), name="input_z")
+        self.X_g, self.g_nets = self.generator(batch_z, name="generator")
 
-        self.fake_measureY = self.measurement_fn(self.genX, name="measurement_fn")
-        self.fake_d_logits, self.fake_d_net = self.discriminator(self.fake_measureY, name="discriminator")
-        self.real_d_logits, self.real_d_net = self.discriminator(self.images, name="discriminator", reuse=True)
+        self.Y_g = self.measurement_fn(self.X_g, name="measurement_fn")
+        self.fake_d_logits, self.fake_d_net = self.discriminator(self.Y_g, name="discriminator")
+        self.real_d_logits, self.real_d_net = self.discriminator(self.Y_r, name="discriminator", reuse=True)
 
 
         trainable_vars = tf.trainable_variables()
@@ -129,8 +132,13 @@ class ambientGAN():
 
     def measurement_fn(self, input, name="measurement_fn"):
         with tf.variable_scope(name) as scope:
-            return block_pixels(input, p=0.5)
-            return block_patch(input, 16)
+            if self.measurement == "block_pixels"
+                return block_pixels(input, p=0.5)
+            elif self.measurement == "block_patch"
+                return block_patch(input, k_size=32)
+            elif self.measurement == "keep_patch":
+                return keep_patch(input, k_size=32)
+
 
 
 

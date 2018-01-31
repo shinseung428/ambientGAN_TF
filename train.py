@@ -10,6 +10,7 @@ def train(args, sess, model):
 
     epoch = 0
     step = 0
+    global_step = 0
 
     #saver
     saver = tf.train.Saver()        
@@ -29,8 +30,9 @@ def train(args, sess, model):
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
 
-    all_summary = tf.summary.merge([model.images_sum,
-                                    model.genX_sum, 
+    all_summary = tf.summary.merge([model.Y_r_sum,
+                                    model.X_g_sum,
+                                    model.Y_g_sum, 
                                     model.d_loss_sum,
                                     model.g_loss_sum])
 
@@ -39,14 +41,14 @@ def train(args, sess, model):
     while epoch < args.epochs:
         #Update Discriminator
         summary, d_loss, _ = sess.run([all_summary, model.d_loss, d_optimizer])
-        writer.add_summary(summary, step)
+        writer.add_summary(summary, global_step)
 
         #Update Generator
         summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])
-        writer.add_summary(summary, step)
+        writer.add_summary(summary, global_step)
         #Update Generator Again
         summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])
-        writer.add_summary(summary, step)
+        writer.add_summary(summary, global_step)
 
 
         print "Epoch [%d] Step [%d] G Loss: [%.4f] D Loss: [%.4f]" % (epoch, step, g_loss, d_loss)
@@ -61,6 +63,7 @@ def train(args, sess, model):
             epoch += 1 
 
         step += 1
+        global_step += 1
 
 
 
