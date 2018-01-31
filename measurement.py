@@ -1,6 +1,6 @@
 import tensorflow as tf 
 import numpy as np
-
+import scipy.stats as st
 
 def block_pixels(input, p=0.5):
 	shape = input.get_shape().as_list()
@@ -21,8 +21,37 @@ def block_pixels(input, p=0.5):
 		res = tf.stack(res)		
 	return res
 
-def conv_noise(input, k_size, noise):
-	pass
+def conv_noise(input, k_size=3, noise=0.0):
+	shape = input.get_shape().as_list()
+	def gauss_kernel(kernlen=3, nsig=10, channels=1):
+		interval = (2*nsig+1.)/(kernlen)
+		x = np.linspace(-nsig-interval/2., nsig+interval/2., kernlen+1)
+		kern1d = np.diff(st.norm.cdf(x))
+		kernel_raw = np.sqrt(np.outer(kern1d, kern1d))
+		kernel = kernel_raw/kernel_raw.sum()
+		out_filter = np.array(kernel, dtype = np.float32)
+		out_filter = out_filter.reshape((kernlen, kernlen, 1, 1))
+		out_filter = np.repeat(out_filter, channels, axis = 2)
+		out_filter = np.repeat(out_filter, channels, axis = 3)
+		return tf.convert_to_tensor(out_filter)
+
+	if len(shape) == 3:
+		gauss_kernel = gauss_kernel(kernlen=k_size, channels=3)
+		input = input[tf.newaxis,...]
+		res = tf.nn.conv2d(input, gauss_kernel, 
+							strides=[1, 1, 1, 1],
+							padding="SAME",
+							name="conv1")
+		res = input[0,...]	
+	else:
+		gauss_kernel = gauss_kernel(kernlen=k_size, channels=3)
+		res = tf.nn.conv2d(input, gauss_kernel, 
+							strides=[1, 1, 1, 1],
+							padding="SAME",
+							name="conv1")
+
+
+	return res
 
 def block_patch(input, k_size=32):
 	shape = input.get_shape().as_list()
@@ -51,7 +80,6 @@ def block_patch(input, k_size=32):
 		res = tf.stack(res)
 
 	return res
-
 
 
 def keep_patch(input, k_size=32):

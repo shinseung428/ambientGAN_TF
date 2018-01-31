@@ -19,7 +19,7 @@ def train(args, sess, model):
         saver.restore(sess, last_ckpt)
         ckpt_name = str(last_ckpt)
         print "Loaded model file from " + ckpt_name
-        step = int(ckpt_name.split('-')[-1])
+        epoch = int(ckpt_name.split('-')[-1])
         tf.local_variables_initializer().run()
     else:
         tf.global_variables_initializer().run()
@@ -54,9 +54,9 @@ def train(args, sess, model):
         print "Epoch [%d] Step [%d] G Loss: [%.4f] D Loss: [%.4f]" % (epoch, step, g_loss, d_loss)
 
         if step*args.batch_size >= model.data_count:
-            saver.save(sess, args.checkpoints_path + "model", global_step=epoch)
+            saver.save(sess, args.checkpoints_path + "/model", global_step=epoch)
 
-            res_img = sess.run([model.genX])
+            res_img = sess.run(model.X_g)
 
             img_tile(epoch, args, res_img)
             step = 0
@@ -79,12 +79,18 @@ def main(_):
     
     with tf.Session(config=run_config) as sess:
         model = ambientGAN(args)
+        args.images_path = os.path.join(args.images_path, args.measurement)
+        args.graph_path = os.path.join(args.graph_path, args.measurement)
+        args.checkpoints_path = os.path.join(args.checkpoints_path, args.measurement)
 
+        images_path = os.path.join(args.images_path, args.measurement)
         #create graph and checkpoints folder if they don't exist
         if not os.path.exists(args.checkpoints_path):
             os.makedirs(args.checkpoints_path)
         if not os.path.exists(args.graph_path):
             os.makedirs(args.graph_path)
+        if not os.path.exists(args.images_path):
+            os.makedirs(args.images_path)
             
         print 'Start Training...'
         train(args, sess, model)

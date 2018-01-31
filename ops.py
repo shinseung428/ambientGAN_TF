@@ -29,6 +29,8 @@ def load_train_data(args):
 		images = block_patch(images, k_size=32)
 	elif args.measurement == "keep_patch":
 		images = keep_patch(images, k_size=32)
+	elif args.measurement == "conv_noise":
+		images = conv_noise(images, k_size=3, noise=0.0)		
 
 	train_batch = tf.train.shuffle_batch([images],
 										 batch_size=args.batch_size,
@@ -40,8 +42,6 @@ def load_train_data(args):
 	return train_batch, data_count
 
 def img_tile(epoch, args, imgs, aspect_ratio=1.0, tile_shape=None, border=1, border_color=0):
-	imgs = imgs[0]
-
 	if imgs.ndim != 3 and imgs.ndim != 4:
 		raise ValueError('imgs has wrong number of dimensions.')
 	n_imgs = imgs.shape[0]
@@ -73,6 +73,8 @@ def img_tile(epoch, args, imgs, aspect_ratio=1.0, tile_shape=None, border=1, bor
 				# No more images - stop filling out the grid.
 				break
 			img = imgs[img_idx]
+			img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
 			yoff = (img_shape[0] + border) * i
 			xoff = (img_shape[1] + border) * j
 			tile_img[yoff:yoff+img_shape[0], xoff:xoff+img_shape[1], ...] = img
