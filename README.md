@@ -1,6 +1,6 @@
 # Tensorflow implementation of AmbientGAN
 
-### data folder setting
+### folder setting
 ```
 -data
   -img_align_celeba
@@ -35,27 +35,27 @@ $ python train.py --measurement=block_pixel --continue_training=True
 ## Block-Pixels
 
 ***Trained CelebA images***  
-![Alt text](images/blockpixels_train.jpg?raw=true "blockpixels celeba")
-***Results***
-![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")
-![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")
+![Alt text](images/blockpixels_train.jpg?raw=true "blockpixels celeba")  
+***Results***  
+![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")  
+![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")  
 
 
 ## Block-Patch
 
 ***Trained CelebA images***  
-![Alt text](images/blockpatch_train.jpg?raw=true "blockpatch celeba")
+![Alt text](images/blockpatch_train.jpg?raw=true "blockpatch celeba")  
 ***Results***  
-![Alt text](images/blockpatch_result.jpg?raw=true "blockpatch result") 
-![Alt text](images/blockpatch_result.gif?raw=true "blockpatch result gif") 
+![Alt text](images/blockpatch_result.jpg?raw=true "blockpatch result")  
+![Alt text](images/blockpatch_result.gif?raw=true "blockpatch result gif")  
 
 ## Keep-Patch
 
 ***Trained CelebA images***  
-![Alt text](images/keeppatch_train.jpg?raw=true "keeppatch celeba")
+![Alt text](images/keeppatch_train.jpg?raw=true "keeppatch celeba")  
 ***Results***  
-![Alt text](images/keeppatch_result.jpg?raw=true "keeppatch result")
-![Alt text](images/keeppatch_result.gif?raw=true "keeppatch result gif")
+![Alt text](images/keeppatch_result.jpg?raw=true "keeppatch result")  
+![Alt text](images/keeppatch_result.gif?raw=true "keeppatch result gif")  
 
 
 ## Convolve+Noise Result
