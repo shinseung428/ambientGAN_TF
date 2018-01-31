@@ -23,12 +23,12 @@ def load_train_data(args):
 	images = tf.image.convert_image_dtype(images, dtype=tf.float32) / 127.5 - 1
 
 
-	if self.measurement == "block_pixels"
-		return block_pixels(input, p=0.5)
-	elif self.measurement == "block_patch"
-		return block_patch(input, k_size=32)
-	elif self.measurement == "keep_patch":
-		return keep_patch(input, k_size=32)
+	if args.measurement == "block_pixels":
+		images = block_pixels(images, p=0.5)
+	elif args.measurement == "block_patch":
+		images = block_patch(images, k_size=32)
+	elif args.measurement == "keep_patch":
+		images = keep_patch(images, k_size=32)
 
 	train_batch = tf.train.shuffle_batch([images],
 										 batch_size=args.batch_size,
