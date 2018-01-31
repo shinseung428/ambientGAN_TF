@@ -4,9 +4,10 @@ from ambientGAN import *
 
 
 def train(args, sess, model):
-    #optimizer
+    #optimizers
     g_optimizer = tf.train.AdamOptimizer(args.learning_rate, beta1=args.momentum, name="AdamOptimizer_G").minimize(model.g_loss, var_list=model.g_vars)
     d_optimizer = tf.train.AdamOptimizer(args.learning_rate, beta1=args.momentum, name="AdamOptimizer_D").minimize(model.d_loss, var_list=model.d_vars)
+
 
     epoch = 0
     step = 0
@@ -29,15 +30,15 @@ def train(args, sess, model):
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
-
+    #summary init
     all_summary = tf.summary.merge([model.Y_r_sum,
                                     model.X_g_sum,
                                     model.Y_g_sum, 
                                     model.d_loss_sum,
                                     model.g_loss_sum])
-
     writer = tf.summary.FileWriter(args.graph_path, sess.graph)
 
+    #training starts here
     while epoch < args.epochs:
         batch_z = np.random.uniform(-1, 1, size=(args.batch_size , args.input_dim))
 
@@ -85,7 +86,7 @@ def main(_):
         args.graph_path = os.path.join(args.graph_path, args.measurement)
         args.checkpoints_path = os.path.join(args.checkpoints_path, args.measurement)
 
-        #create graph and checkpoints folder if they don't exist
+        #create graph, images, and checkpoints folder if they don't exist
         if not os.path.exists(args.checkpoints_path):
             os.makedirs(args.checkpoints_path)
         if not os.path.exists(args.graph_path):
