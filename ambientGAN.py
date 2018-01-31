@@ -24,7 +24,7 @@ class ambientGAN():
 
     def build_model(self):
         batch_z = tf.random_uniform([self.batch_size, self.input_dim], minval=-1, maxval=1, dtype=tf.float32)
-        
+
         self.X_g, self.g_nets = self.generator(batch_z, name="generator")
 
         self.Y_g = self.measurement_fn(self.X_g, name="measurement_fn")

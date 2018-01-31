@@ -82,7 +82,11 @@ def main(_):
         args.images_path = os.path.join(args.images_path, args.measurement)
         args.graph_path = os.path.join(args.graph_path, args.measurement)
         args.checkpoints_path = os.path.join(args.checkpoints_path, args.measurement)
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> a681d268c5936620d32858707116925a04c64526
         #create graph and checkpoints folder if they don't exist
         if not os.path.exists(args.checkpoints_path):
             os.makedirs(args.checkpoints_path)
