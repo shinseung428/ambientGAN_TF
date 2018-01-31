@@ -40,14 +40,14 @@ def train(args, sess, model):
 
     while epoch < args.epochs:
         #Update Discriminator
-        summary, d_loss, _ = sess.run([all_summary, model.d_loss, d_optimizer])
+        summary, d_loss, _ = sess.run([all_summary, model.d_loss, d_optimizer])#, feed_dict={model.z:batch_z})
         writer.add_summary(summary, global_step)
 
         #Update Generator
-        summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])
+        summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])#, feed_dict={model.z:batch_z})
         writer.add_summary(summary, global_step)
         #Update Generator Again
-        summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])
+        summary, g_loss, _ = sess.run([all_summary, model.g_loss, g_optimizer])#, feed_dict={model.z:batch_z})
         writer.add_summary(summary, global_step)
 
 

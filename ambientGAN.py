@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 
 from ops import *
 from architecture import *
@@ -23,9 +24,9 @@ class ambientGAN():
         self.Y_g_sum = tf.summary.image("Y_g", self.Y_g, max_outputs=5)
 
     def build_model(self):
-        batch_z = tf.random_uniform([self.batch_size, self.input_dim], minval=-1, maxval=1, dtype=tf.float32)
+        self.z = tf.random_uniform([self.batch_size, self.input_dim], minval=-1, maxval=1, dtype=tf.float32)
 
-        self.X_g, self.g_nets = self.generator(batch_z, name="generator")
+        self.X_g, self.g_nets = self.generator(self.z, name="generator")
 
         self.Y_g = self.measurement_fn(self.X_g, name="measurement_fn")
         self.fake_d_logits, self.fake_d_net = self.discriminator(self.Y_g, name="discriminator")

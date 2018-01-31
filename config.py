@@ -33,7 +33,7 @@ parser.add_argument('--learning_rate', dest='learning_rate', default=0.0001, hel
 parser.add_argument('--momentum', dest='momentum', default=0.5, help='momentum of the optimizer')
 
 #Extra folders setting
-parser.add_argument('--checkpoints_path', dest='checkpoints_path', default='./checkpoints/', help='saved model checkpoint path')
-parser.add_argument('--graph_path', dest='graph_path', default='./graphs/', help='tensorboard graph')
+parser.add_argument('--checkpoints_path', dest='checkpoints_path', default='./tmp/checkpoints/', help='saved model checkpoint path')
+parser.add_argument('--graph_path', dest='graph_path', default='./tmp/graphs/', help='tensorboard graph')
 parser.add_argument('--images_path', dest='images_path', default='./images/', help='result images path')
 args = parser.parse_args()
