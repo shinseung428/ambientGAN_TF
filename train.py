@@ -83,7 +83,11 @@ def main(_):
         args.graph_path = os.path.join(args.graph_path, args.measurement)
         args.checkpoints_path = os.path.join(args.checkpoints_path, args.measurement)
 
-        images_path = os.path.join(args.images_path, args.measurement)
+        args.images_path = os.path.join(args.images_path, args.measurement)
+        args.graph_path = os.path.join(args.graph_path, args.measurement)
+        args.checkpoints_path = os.path.join(args.checkpoints_path, args.measurement)
+
+
         #create graph and checkpoints folder if they don't exist
         if not os.path.exists(args.checkpoints_path):
             os.makedirs(args.checkpoints_path)
@@ -91,7 +95,7 @@ def main(_):
             os.makedirs(args.graph_path)
         if not os.path.exists(args.images_path):
             os.makedirs(args.images_path)
-            
+
         print 'Start Training...'
         train(args, sess, model)
 
