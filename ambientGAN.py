@@ -24,8 +24,8 @@ class ambientGAN():
         self.Y_g_sum = tf.summary.image("Y_g", self.Y_g, max_outputs=5)
 
     def build_model(self):
-        self.z = tf.random_uniform([self.batch_size, self.input_dim], minval=-1, maxval=1, dtype=tf.float32)
-
+        self.z = tf.placeholder(tf.float32, [self.batch_size, self.input_dim], name="z")
+        
         self.X_g, self.g_nets = self.generator(self.z, name="generator")
 
         self.Y_g = self.measurement_fn(self.X_g, name="measurement_fn")
