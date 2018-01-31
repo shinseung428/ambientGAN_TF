@@ -58,7 +58,7 @@ def train(args, sess, model):
         if step*args.batch_size >= model.data_count:
             saver.save(sess, args.checkpoints_path + "/model", global_step=epoch)
 
-            res_img = sess.run(model.X_g)
+            res_img = sess.run(model.X_g, feed_dict={model.z:batch_z})
 
             img_tile(epoch, args, res_img)
             step = 0
