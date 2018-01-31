@@ -29,7 +29,7 @@ parser.add_argument('--data', dest='data', default='data', help='cats image trai
 parser.add_argument('--epochs', dest='epochs', default=25, help='total number of epochs')
 parser.add_argument('--batch_size', dest='batch_size', default=64, help='batch size')
 
-parser.add_argument('--learning_rate', dest='learning_rate', default=1e-5, help='learning rate of the optimizer')
+parser.add_argument('--learning_rate', dest='learning_rate', default=0.0001, help='learning rate of the optimizer')
 parser.add_argument('--momentum', dest='momentum', default=0.5, help='momentum of the optimizer')
 
 #Extra folders setting
