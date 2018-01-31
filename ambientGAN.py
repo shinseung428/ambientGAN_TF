@@ -18,9 +18,9 @@ class ambientGAN():
         #summary
         self.d_loss_sum = tf.summary.scalar("d_loss", self.d_loss) 
         self.g_loss_sum = tf.summary.scalar("g_loss", self.g_loss)
-        self.Y_r_sum = tf.summary.image("input_img", self.Y_r)
-        self.X_g_sum = tf.summary.image("X_g", self.X_g)
-        self.Y_g_sum = tf.summary.image("Y_g", self.Y_g)
+        self.Y_r_sum = tf.summary.image("input_img", self.Y_r, max_outputs=5)
+        self.X_g_sum = tf.summary.image("X_g", self.X_g, max_outputs=5)
+        self.Y_g_sum = tf.summary.image("Y_g", self.Y_g, max_outputs=5)
 
     def build_model(self):
         batch_z = tf.Variable(tf.random_uniform([self.batch_size, self.input_dim], minval=-1, maxval=1, dtype=tf.float32), name="input_z")
