@@ -26,13 +26,13 @@ def load_train_data(args):
 
 	#apply measurement models
 	if args.measurement == "block_pixels":
-		images = block_pixels(images, p=0.5)
+		images = block_pixels(images, prob=args.prob)
 	elif args.measurement == "block_patch":
-		images = block_patch(images, k_size=32)
+		images = block_patch(images, p_size=args.patch_size)
 	elif args.measurement == "keep_patch":
-		images = keep_patch(images, k_size=32)
+		images = keep_patch(images, p_size=args.patch_size)
 	elif args.measurement == "conv_noise":
-		images = conv_noise(images, k_size=3, stddev=0.1)		
+		images = conv_noise(images, k_size=args.kernel_size, stddev=args.stddev)		
 
 	train_batch = tf.train.shuffle_batch([images],
 										 batch_size=args.batch_size,

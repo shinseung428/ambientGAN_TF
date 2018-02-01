@@ -11,6 +11,12 @@ class ambientGAN():
         self.batch_size = args.batch_size
         self.input_dim = args.input_dim 
 
+        #measurement model param setting
+        self.prob = args.prob
+        self.patch_size = args.patch_size
+        self.kernel_size = args.kernel_size
+        self.stddev = args.stddev
+
         #prepare training data
         self.Y_r, self.data_count = load_train_data(args)
         self.build_model()
@@ -137,13 +143,13 @@ class ambientGAN():
     def measurement_fn(self, input, name="measurement_fn"):
         with tf.variable_scope(name) as scope:
             if self.measurement == "block_pixels":
-                return block_pixels(input, p=0.5)
+                return block_pixels(input, prob=self.prob)
             elif self.measurement == "block_patch":
-                return block_patch(input, k_size=32)
+                return block_patch(input, patch_size=self.patch_size)
             elif self.measurement == "keep_patch":
-                return keep_patch(input, k_size=32)
+                return keep_patch(input, patch_size=self.patch_size)
             elif self.measurement == "conv_noise":
-                return conv_noise(input, k_size=3, stddev=0.1)
+                return conv_noise(input, kernel_size=self.kernel_size, stddev=self.stddev)
 
 
 

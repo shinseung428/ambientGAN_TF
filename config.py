@@ -13,8 +13,6 @@ def str2bool(v):
 parser = argparse.ArgumentParser(description='')
 
 #Image setting
-parser.add_argument('--measurement', dest='measurement', default='block_pixels', help='measurement function')
-
 parser.add_argument('--input_width', dest='input_width', default=64, help='input image width')
 parser.add_argument('--input_height', dest='input_height', default=64, help='input image height')
 parser.add_argument('--input_channel', dest='input_channel', default=3, help='input image channel')
@@ -31,6 +29,13 @@ parser.add_argument('--batch_size', dest='batch_size', default=64, help='batch s
 
 parser.add_argument('--learning_rate', dest='learning_rate', default=0.0001, help='learning rate of the optimizer')
 parser.add_argument('--momentum', dest='momentum', default=0.5, help='momentum of the optimizer')
+
+#Measurement model setting
+parser.add_argument('--measurement', dest='measurement', default='block_pixels', help='measurement function')
+parser.add_argument('--prob', dest='prob', default=0.5, help='probability')
+parser.add_argument('--patch_size', dest='patch_size', default=32, help='patch size')
+parser.add_argument('--kernel_size', dest='kernel_size', default=3, help='gaussian kernel size')
+parser.add_argument('--stddev', dest='stddev', default=0.1, help='standard deviation')
 
 #Extra folders setting
 parser.add_argument('--checkpoints_path', dest='checkpoints_path', default='./checkpoints/', help='saved model checkpoint path')
