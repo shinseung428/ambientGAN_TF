@@ -37,7 +37,7 @@ $ python train.py --measurement=block_pixel --continue_training=True
 ***Trained CelebA images (pixels blocked with p=0.5)***  
 ![Alt text](images/blockpixels_train.jpg?raw=true "blockpixels celeba")  
 ***Results***  
-<img src="images/blockpixels_result.jpg" width="100"/> <img src="images/blockpixels_result.gif" width="100"/> 
+<img src="images/blockpixels_result.jpg" width="450"/> <img src="images/blockpixels_result.gif" width="450"/> 
 <!-- ![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")  
 ![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")   -->
 
@@ -47,8 +47,9 @@ $ python train.py --measurement=block_pixel --continue_training=True
 ***Trained CelebA images (randomly blocked 32x32 patch)***  
 ![Alt text](images/blockpatch_train.jpg?raw=true "blockpatch celeba")  
 ***Results***  
-![Alt text](images/blockpatch_result.jpg?raw=true "blockpatch result")  
-![Alt text](images/blockpatch_result.gif?raw=true "blockpatch result gif")  
+<img src="images/blockpatch_result.jpg" width="450"/> <img src="images/blockpatch_result.gif" width="450"/> 
+<!-- ![Alt text](images/blockpatch_result.jpg?raw=true "blockpatch result")  
+![Alt text](images/blockpatch_result.gif?raw=true "blockpatch result gif")   -->
 
 ## Keep-Patch
 
