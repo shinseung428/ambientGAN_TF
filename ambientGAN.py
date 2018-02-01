@@ -8,10 +8,10 @@ from measurement import *
 class ambientGAN():
     def __init__(self, args):
         self.measurement = args.measurement
-
         self.batch_size = args.batch_size
         self.input_dim = args.input_dim 
 
+        #prepare training data
         self.Y_r, self.data_count = load_train_data(args)
         self.build_model()
         self.build_loss()
@@ -23,6 +23,7 @@ class ambientGAN():
         self.X_g_sum = tf.summary.image("X_g", self.X_g, max_outputs=5)
         self.Y_g_sum = tf.summary.image("Y_g", self.Y_g, max_outputs=5)
 
+    #structure of the model
     def build_model(self):
         self.z = tf.placeholder(tf.float32, [self.batch_size, self.input_dim], name="z")
         
@@ -31,7 +32,6 @@ class ambientGAN():
         self.Y_g = self.measurement_fn(self.X_g, name="measurement_fn")
         self.fake_d_logits, self.fake_d_net = self.discriminator(self.Y_g, name="discriminator")
         self.real_d_logits, self.real_d_net = self.discriminator(self.Y_r, name="discriminator", reuse=True)
-
 
         trainable_vars = tf.trainable_variables()
         self.g_vars = []
@@ -42,6 +42,7 @@ class ambientGAN():
             else:
                 self.d_vars.append(var)
 
+    #loss function
     def build_loss(self):
         def calc_loss(logits, label):
             if label==1:
@@ -57,7 +58,7 @@ class ambientGAN():
         self.g_loss = calc_loss(self.fake_d_logits, 1)
 
 
-
+    # G network from DCGAN
     def generator(self, z, name="generator"):
         nets = []
         with tf.variable_scope(name) as scope:
@@ -88,6 +89,7 @@ class ambientGAN():
 
             return deconv4, nets
 
+    # D network from DCGAN
     def discriminator(self, input, name="discriminator", reuse=False):
         nets = []
         with tf.variable_scope(name, reuse=reuse) as scope:
@@ -131,7 +133,7 @@ class ambientGAN():
             return output, nets
 
 
-
+    #pass generated image to measurment model
     def measurement_fn(self, input, name="measurement_fn"):
         with tf.variable_scope(name) as scope:
             if self.measurement == "block_pixels":
@@ -141,7 +143,7 @@ class ambientGAN():
             elif self.measurement == "keep_patch":
                 return keep_patch(input, k_size=32)
             elif self.measurement == "conv_noise":
-                return conv_noise(input, k_size=32, noise=0.0)
+                return conv_noise(input, k_size=32, stddev=0.1)
 
 
 

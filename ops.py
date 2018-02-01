@@ -7,6 +7,7 @@ import cv2
 
 from measurement import *
 
+#function to get training data
 def load_train_data(args):
 	paths = os.path.join(args.data, "img_align_celeba/*.jpg")
 	data_count = len(glob(paths))
@@ -18,11 +19,12 @@ def load_train_data(args):
 	images = tf.image.decode_jpeg(image_file, channels=3)
 
 	#input image range from -1 to 1
+	#center crop 32x32 since raw images are not center cropped.
 	images = tf.image.central_crop(images, 0.5)
 	images = tf.image.resize_images(images ,[args.input_height, args.input_width])
 	images = tf.image.convert_image_dtype(images, dtype=tf.float32) / 127.5 - 1
 
-
+	#apply measurement models
 	if args.measurement == "block_pixels":
 		images = block_pixels(images, p=0.5)
 	elif args.measurement == "block_patch":
@@ -30,7 +32,7 @@ def load_train_data(args):
 	elif args.measurement == "keep_patch":
 		images = keep_patch(images, k_size=32)
 	elif args.measurement == "conv_noise":
-		images = conv_noise(images, k_size=3, noise=0.0)		
+		images = conv_noise(images, k_size=3, stddev=0.1)		
 
 	train_batch = tf.train.shuffle_batch([images],
 										 batch_size=args.batch_size,
@@ -41,6 +43,9 @@ def load_train_data(args):
 
 	return train_batch, data_count
 
+
+#function to save images in tile
+#comment this function block if you don't have opencv
 def img_tile(epoch, args, imgs, aspect_ratio=1.0, tile_shape=None, border=1, border_color=0):
 	if imgs.ndim != 3 and imgs.ndim != 4:
 		raise ValueError('imgs has wrong number of dimensions.')
