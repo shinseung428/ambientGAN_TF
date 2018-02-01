@@ -1,4 +1,7 @@
 # Tensorflow implementation of AmbientGAN
+Tensorflow implementation of [AmbientGAN](https://openreview.net/forum?id=Hy7fDog0b).  
+The model proposed in this paper learns an implicit generative model given only lossy measurement models. It doesn't have access to fully-observed samples, and yet it recovers true underlying distribution.  
+
 
 ### folder setting
 ```
@@ -35,49 +38,39 @@ $ python train.py --measurement=block_pixel --continue_training=True
 ## Block-Pixels
 
 ***Trained CelebA images (pixels blocked with p=0.5)***  
-<!-- ![Alt text](images/blockpixels_train.jpg?raw=true "blockpixels celeba")   -->
-<img src="images/blockpixels_train.jpg" width="300"/>
+<img src="images/blockpixels_train.jpg" width="400"/>
 
 ***Results***  
-<img src="images/blockpixels_result.jpg" width="300"/>  
+<img src="images/blockpixels_result.jpg" width="400"/>  
   
-<img src="images/blockpixels_result.gif" width="300"/> 
-<!-- ![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")  
-![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")   -->
+<img src="images/blockpixels_result.gif" width="400"/> 
 
 
 ## Block-Patch
 
 ***Trained CelebA images (randomly blocked 32x32 patch)***  
-<!-- ![Alt text](images/blockpatch_train.jpg?raw=true "blockpatch celeba")   -->
-<img src="images/blockpatch_train.jpg" width="300"/>  
+<img src="images/blockpatch_train.jpg" width="400"/>  
 
 ***Results***  
-<img src="images/blockpatch_result.jpg" width="300"/>  
+<img src="images/blockpatch_result.jpg" width="400"/>  
   
-<img src="images/blockpatch_result.gif" width="300"/> 
-<!-- ![Alt text](images/blockpatch_result.jpg?raw=true "blockpatch result")  
-![Alt text](images/blockpatch_result.gif?raw=true "blockpatch result gif")   -->
+<img src="images/blockpatch_result.gif" width="400"/> 
 
 ## Keep-Patch
 
 ***Trained CelebA images (randomly kept 32x32 patch)***  
-<!-- ![Alt text](images/keeppatch_train.jpg?raw=true "keeppatch celeba")   -->
-<img src="images/keeppatch_train.jpg" width="300"/>  
+<img src="images/keeppatch_train.jpg" width="400"/>  
 
 ***Results***  
-<img src="images/keeppatch_result.jpg" width="300"/>  
+<img src="images/keeppatch_result.jpg" width="400"/>  
   
-<img src="images/keeppatch_result.gif" width="300"/> 
-<!-- ![Alt text](images/keeppatch_result.jpg?raw=true "keeppatch result")  
-![Alt text](images/keeppatch_result.gif?raw=true "keeppatch result gif")   -->
+<img src="images/keeppatch_result.gif" width="400"/> 
 
 
 ## Convolve+Noise  
 
 ***Trained CelebA images (gaussian filter + noise(stddev=0.1))***
-<!-- ![Alt text](images/convnoise_train.jpg?raw=true "convnoise celeba")   -->
-<img src="images/convnoise_train.jpg" width="200"/>  
+<img src="images/convnoise_train.jpg" width="400"/>  
 
 <!-- ***Results***  
 ![Alt text](images/convnoise_result.jpg?raw=true "convnoise result")  
