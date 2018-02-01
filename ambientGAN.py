@@ -143,7 +143,7 @@ class ambientGAN():
             elif self.measurement == "keep_patch":
                 return keep_patch(input, k_size=32)
             elif self.measurement == "conv_noise":
-                return conv_noise(input, k_size=32, stddev=0.1)
+                return conv_noise(input, k_size=3, stddev=0.1)
 
 
 
