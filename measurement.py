@@ -63,7 +63,7 @@ def conv_noise(input, k_size=3, stddev=0.0):
 
 	return res + noise
 
-#A randomly chosen k × k patch is set to zero
+#A randomly chosen k x k patch is set to zero
 def block_patch(input, k_size=32):
 	shape = input.get_shape().as_list()
 
@@ -95,7 +95,7 @@ def block_patch(input, k_size=32):
 
 	return res
 
-#All pixels outside a randomly chosen k × k patch are set to zero
+#All pixels outside a randomly chosen k x k patch are set to zero
 def keep_patch(input, k_size=32):
 	shape = input.get_shape().as_list()
 	#for training images
