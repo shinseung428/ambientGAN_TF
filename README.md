@@ -69,7 +69,7 @@ $ python train.py --measurement=block_pixel --continue_training=True
 
 ## Convolve+Noise  
 
-***Trained CelebA images (gaussian filter + noise(stddev=0.1))***
+***Trained CelebA images (gaussian filter + noise(stddev=0.1))***  
 <img src="images/convnoise_train.jpg" width="400"/>  
 
 <!-- ***Results***  
