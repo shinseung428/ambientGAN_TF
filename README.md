@@ -1,5 +1,5 @@
 # Tensorflow implementation of AmbientGAN
-Tensorflow implementation of [AmbientGAN](https://openreview.net/forum?id=Hy7fDog0b).  
+Tensorflow implementation of [AmbientGAN](https://openreview.net/forum?id=Hy7fDog0b) on [celebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) dataset.  
 The model proposed in this paper learns an implicit generative model given only lossy measurement models. It doesn't have access to fully-observed samples, and yet it recovers true underlying distribution.  
 
 ## Network  
