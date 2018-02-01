@@ -29,11 +29,11 @@ parser.add_argument('--data', dest='data', default='data', help='cats image trai
 parser.add_argument('--epochs', dest='epochs', default=25, help='total number of epochs')
 parser.add_argument('--batch_size', dest='batch_size', default=64, help='batch size')
 
-parser.add_argument('--learning_rate', dest='learning_rate', default=0.0001, help='learning rate of the optimizer')
+parser.add_argument('--learning_rate', dest='learning_rate', default=0.0002, help='learning rate of the optimizer')
 parser.add_argument('--momentum', dest='momentum', default=0.5, help='momentum of the optimizer')
 
 #Extra folders setting
-parser.add_argument('--checkpoints_path', dest='checkpoints_path', default='./tmp/checkpoints/', help='saved model checkpoint path')
-parser.add_argument('--graph_path', dest='graph_path', default='./tmp/graphs/', help='tensorboard graph')
+parser.add_argument('--checkpoints_path', dest='checkpoints_path', default='./checkpoints/', help='saved model checkpoint path')
+parser.add_argument('--graph_path', dest='graph_path', default='./graphs/', help='tensorboard graph')
 parser.add_argument('--images_path', dest='images_path', default='./images/', help='result images path')
 args = parser.parse_args()
