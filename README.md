@@ -37,11 +37,9 @@ $ python train.py --measurement=block_pixel --continue_training=True
 ***Trained CelebA images (pixels blocked with p=0.5)***  
 ![Alt text](images/blockpixels_train.jpg?raw=true "blockpixels celeba")  
 ***Results***  
-Solarized dark             |  Solarized Ocean
-:-------------------------:|:-------------------------:
-![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")    |  ![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")
-
-  
+<img src="images/blockpixels_result.jpg" width="100"/> <img src="images/blockpixels_result.gif" width="100"/> 
+<!-- ![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")  
+![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")   -->
 
 
 ## Block-Patch
