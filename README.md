@@ -34,16 +34,19 @@ $ python train.py --measurement=block_pixel --continue_training=True
 
 ## Block-Pixels
 
-***Trained CelebA images***  
+***Trained CelebA images (pixels blocked with p=0.5)***  
 ![Alt text](images/blockpixels_train.jpg?raw=true "blockpixels celeba")  
 ***Results***  
-![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")  
-![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")  
+              |   
+:-------------------------:|:-------------------------:
+![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")    |  ![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")
+
+  
 
 
 ## Block-Patch
 
-***Trained CelebA images***  
+***Trained CelebA images (randomly blocked 32x32 patch)***  
 ![Alt text](images/blockpatch_train.jpg?raw=true "blockpatch celeba")  
 ***Results***  
 ![Alt text](images/blockpatch_result.jpg?raw=true "blockpatch result")  
@@ -51,15 +54,19 @@ $ python train.py --measurement=block_pixel --continue_training=True
 
 ## Keep-Patch
 
-***Trained CelebA images***  
+***Trained CelebA images (randomly kept 32x32 patch)***  
 ![Alt text](images/keeppatch_train.jpg?raw=true "keeppatch celeba")  
 ***Results***  
 ![Alt text](images/keeppatch_result.jpg?raw=true "keeppatch result")  
 ![Alt text](images/keeppatch_result.gif?raw=true "keeppatch result gif")  
 
 
-## Convolve+Noise Result
-
+## Convolve+Noise  
+***Trained CelebA images (gaussian filter + noise(stddev=0.1))***
+![Alt text](images/convnoise_train.jpg?raw=true "convnoise celeba")  
+<!-- ***Results***  
+![Alt text](images/convnoise_result.jpg?raw=true "convnoise result")  
+![Alt text](images/convnoise_result.gif?raw=true "convnoise result gif")   -->
 ## ToDo
 * Test Convolve+Noise Result
 
