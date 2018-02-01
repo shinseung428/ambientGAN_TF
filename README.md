@@ -34,9 +34,14 @@ $ python train.py --measurement=block_pixel --continue_training=True
 
 ## Block-Pixels
 
-***Trained CelebA images (pixels blocked with p=0.5)***     ***Results***
+***Trained CelebA images (pixels blocked with p=0.5)***  
 <!-- ![Alt text](images/blockpixels_train.jpg?raw=true "blockpixels celeba")   -->
-<img src="images/blockpixels_train.jpg" width="200"/><img src="images/blockpixels_result.jpg" width="200"/> <img src="images/blockpixels_result.gif" width="200"/> 
+<img src="images/blockpixels_train.jpg" width="300"/>
+
+***Results***  
+<img src="images/blockpixels_result.jpg" width="300"/>  
+  
+<img src="images/blockpixels_result.gif" width="300"/> 
 <!-- ![Alt text](images/blockpixels_result.jpg?raw=true "blockpixels result")  
 ![Alt text](images/blockpixels_result.gif?raw=true "blockpixels result gif")   -->
 
@@ -45,10 +50,12 @@ $ python train.py --measurement=block_pixel --continue_training=True
 
 ***Trained CelebA images (randomly blocked 32x32 patch)***  
 <!-- ![Alt text](images/blockpatch_train.jpg?raw=true "blockpatch celeba")   -->
-<img src="images/blockpatch_train.jpg" width="200"/>  
+<img src="images/blockpatch_train.jpg" width="300"/>  
 
 ***Results***  
-<img src="images/blockpatch_result.jpg" width="200"/> <img src="images/blockpatch_result.gif" width="200"/> 
+<img src="images/blockpatch_result.jpg" width="300"/>  
+  
+<img src="images/blockpatch_result.gif" width="300"/> 
 <!-- ![Alt text](images/blockpatch_result.jpg?raw=true "blockpatch result")  
 ![Alt text](images/blockpatch_result.gif?raw=true "blockpatch result gif")   -->
 
@@ -56,10 +63,12 @@ $ python train.py --measurement=block_pixel --continue_training=True
 
 ***Trained CelebA images (randomly kept 32x32 patch)***  
 <!-- ![Alt text](images/keeppatch_train.jpg?raw=true "keeppatch celeba")   -->
-<img src="images/keeppatch_train.jpg" width="200"/>  
+<img src="images/keeppatch_train.jpg" width="300"/>  
 
 ***Results***  
-<img src="images/keeppatch_result.jpg" width="200"/> <img src="images/keeppatch_result.gif" width="200"/> 
+<img src="images/keeppatch_result.jpg" width="300"/>  
+  
+<img src="images/keeppatch_result.gif" width="300"/> 
 <!-- ![Alt text](images/keeppatch_result.jpg?raw=true "keeppatch result")  
 ![Alt text](images/keeppatch_result.gif?raw=true "keeppatch result gif")   -->
 
