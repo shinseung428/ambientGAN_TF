@@ -62,8 +62,9 @@ $ python train.py --measurement=block_pixel --continue_training=True
 <img src="images/keeppatch_train.jpg" width="400"/>  
 
 ***Results***  
-![Alt text](images/keeppatch_result.jpg?raw=true "keeppatch result")  
-![Alt text](images/keeppatch_result.gif?raw=true "keeppatch result gif")  
+<img src="images/keeppatch_result.jpg" width="400"/> <img src="images/keeppatch_result.gif" width="400"/> 
+<!-- ![Alt text](images/keeppatch_result.jpg?raw=true "keeppatch result")  
+![Alt text](images/keeppatch_result.gif?raw=true "keeppatch result gif")   -->
 
 
 ## Convolve+Noise  
