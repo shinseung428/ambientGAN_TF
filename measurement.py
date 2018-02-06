@@ -4,14 +4,14 @@ import scipy.stats as st
 
 
 #Each pixel is independently set to zero with probability p
-def block_pixels(input, prob=0.5):
+def block_pixels(input, probability=0.5):
 	shape = input.get_shape().as_list()
 
 	#for training images
 	if len(shape) == 3:
 		prob = tf.random_uniform([shape[0], shape[1], 3], minval=0, maxval=1, dtype=tf.float32)
 		# prob = tf.tile(prob, [1, 1, 3])
-		prob = tf.to_int32(prob < prob)
+		prob = tf.to_int32(prob < probability)
 		prob = tf.cast(prob, dtype=tf.float32)
 		res = tf.multiply(input, prob)
 	#for generated images
@@ -20,7 +20,7 @@ def block_pixels(input, prob=0.5):
 		for idx in range(0, shape[0]):
 			prob = tf.random_uniform([shape[0], shape[1], 3], minval=0, maxval=1, dtype=tf.float32)
 			# prob = tf.tile(prob, [1, 1, 3])
-			prob = tf.to_int32(prob < prob)
+			prob = tf.to_int32(prob < probability)
 			prob = tf.cast(prob, dtype=tf.float32)
 			res.append(tf.multiply(input[idx], prob))
 		res = tf.stack(res)		

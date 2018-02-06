@@ -26,7 +26,7 @@ def load_train_data(args):
 
 	#apply measurement models
 	if args.measurement == "block_pixels":
-		images = block_pixels(images, prob=args.prob)
+		images = block_pixels(images, probability=args.prob)
 	elif args.measurement == "block_patch":
 		images = block_patch(images, patch_size=args.patch_size)
 	elif args.measurement == "keep_patch":
